@@ -14,7 +14,7 @@ The ADL study data was obtained from UC Irvine, and more information can be obta
 **Downloading**
 
 The raw data for CHAP (ADL data sets) can be downloaded here:
-https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI HAR Dataset.zip
+<https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
 
 
 
