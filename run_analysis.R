@@ -225,12 +225,17 @@ signalData <-  merge(mdf[,c(1,4,9)], signalData[,2:6], by="orig_signal", all.y=T
 #     (2) Original Function (Mean vs SD) + 
 #     (3) Activity (Standing, etc.) +
 #     (4) Subject (#1, #2, etc.)
-meanSubActFunSig <- ddply(signalData, .(signal_desc, function_var, activity, subject), summarize, mean=mean(value))
+meanSubActFunSig <- ddply(signalData, .(signal_desc, function_var, activity, subject), summarize, 
+                          mean=round(mean(value),4))
 
 # sort the resulting data frame by Subject,Signal Description, Original Function and Activity
 # rename the rows to a numerical index
 meanSubActFunSig <-  meanSubActFunSig[with(meanSubActFunSig, order(subject,signal_desc,function_var,activity)),]
 rownames(meanSubActFunSig) <- 1:nrow(meanSubActFunSig)
+
+write.table(meanSubActFunSig,file="humanActivityData.txt",row.names=FALSE, col.names=TRUE, sep=" ")
+
+#read.table("humanActivityData.txt", header=TRUE, sep=" ")
 
 ### Completion of: 5.  Creates a second, independent tidy data set with the average of each variable for each activity and each subject. ###
 
