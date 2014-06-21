@@ -1,83 +1,210 @@
-Repository:   GetAndCleanDataProject
+Code Book
 =============================
 
 Coursera: Human Activity Project (CHAP)
 
 
-**Background**
 
-The study, *Human Activity Recognition Using Smart Phones*, was performed by *Smartlab - Non Linear Complex Systems Laboratory*. This study produced a human activity recognition database built from the recordings of 30 subjects performing activities of daily living (ADL) while carrying a waist-mounted smartphone with embedded inertial sensors. The ADL data will be referred to as “Raw" data for the purposes of the secondary study, *Coursera – Human Activity Project* or (CHAP).
-
-The ADL study data was obtained from UC Irvine, and more information can be obtained here: 
- <http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones>
- 
-
-**Files**
-
-From ACL
-
-1. activity_labels.txt -- Links the 6 class labels with their activity name. (i.e., Walking, etc.)
-2. features.txt -- List of all features. (i.e., tBodyAcc-mean()-X, tBodyAcc-iqr()-Z, fBodyAcc-bandsEnergy()-1,8  etc.)
-3. subject_train.txt -- Each row identifies the training subject who performed the activity for each window sample. Its range is from 1 to 30.
-4. Y_train.txt -- Training labels. (1-6 mapping to activity_labels.txt data)
-5. X_train.txt -- Features training set data  -- normalized and bounded within [-1,1]
-6. subject_test.txt -- Each row identifies the testing subject who performed the activity for each window sample. Its range is from 1 to 30.
-7. Y_test.txt -- Test labels. (1-6 mapping to activity_labels.txt data)
-8. X_test.txt -- Features testing set data  -- normalized and bounded within [-1,1]
-
-Created for CHAP
-
-1. run_analysis.R -- Code used to transform the Raw Data and produce the tidy data set: humanActivityData.txt
-2. humanActivityData.txt -- Tidy data set produced by raw data transformation processed in run_analysis.R
-3. CodeBook.md -- Describes the variables, data and transformations
-
- 
-**Downloading**
-
-The raw data for CHAP (ADL data sets) can be downloaded here:
-<https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip>
+# Input Data:
 
 
+*File: activity_labels.txt*
+
+Variables:
+
+V1 - Unique integer representing 1 of 6 types of activity performed by the subjects 
+
+V2 - Activity Name, text
+
+*Full Data Set:*
+
+| V1 | V2                 |
+|----|--------------------|
+| 1  | WALKING            |
+| 2  | WALKING_UPSTAIRS   |
+| 3  | WALKING_DOWNSTAIRS |
+| 4  | SITTING            |
+| 5  | STANDING           |
+| 6  | LAYING             |
 
 
-The CHAP files can be downloaded at the following links:
+*File: features.txt*
 
-Github repository containing all CHAP files.
-<https://github.com/sharic/GetAndCleanDataProject>
+Variables:
 
-Code Book:
-<https://github.com/sharic/GetAndCleanDataProject/blob/master/CodeBook.md>
+V1 - Unique integer representing the 561 measurements taken with either an accelerometer or a gyroscope
 
-R code to that transform the ADL data:
-<https://github.com/sharic/GetAndCleanDataProject/blob/master/run_analysis.R>
+V2 - Each measurement description (text) represents:
++ Device (accelerometer or gyroscope) that took the measurement +
++ Signal being measured ++ Axial direction of the signal if applicable ++ Time domain signal vs frequency domain signal ++ Variables (function) that was estimated from the signal*Sample Values:*
 
-Tidy data set of human activity data
-<https://github.com/sharic/GetAndCleanDataProject/blob/master/humanActivityData.txt>
+| V1  | V2                   |
+|-----|----------------------|
+| 1   | tBodyAcc-mean()-X    |
+| 2   | tBodyAcc-mean()-Y    |
+| 3   | tBodyAcc-mean()-Z    |
+| …   | …                    |
+| 137 | tBodyGyro-energy()-X |
+| 138 | tBodyGyro-energy()-Y |
+| 138 | tBodyGyro-energy()-Z |
+|     |                      |
+| 504 | fBodyAccMag-std()    |
+| …   | …                    |
+| 561 | …                    |
 
-**Instructions**
 
 
-Unzip the ACL Dataset.zip file downloaded from UC Irvine.
-The top-level directory is called “UCI HAR Dataset”
+*File: subject_train.txt*
 
-For the transformation R script to run properly, make this your working directory.
+Variables:
 
-There are 2 directories under “UCI HAR Dataset” called “test” and “train”.  
-There is another directory called “Inertial Signals” under both the “test” and “train” directories. 
-The 2 “Inertial Signals” directories can be deleted. They are not used for CHAP.
+V1 - Integer (1 to 30) representing training subject who was being measured. Maps to corresponding measurement row in ./train/X_train.txt
 
-ACL File Directory Structure:
+*Raw Data Variables with All Values summarized by Count using R command:data.frame(t(table(read.table("./train/subject_train.txt"))))*| V1 | Freq |
+|----|------|
+| 1  | 347  |
+| 3  | 341  |
+| 5  | 302  |
+| 6  | 325  |
+| 7  | 308  |
+| 8  | 281  |
+| 11 | 316  |
+| 14 | 323  |
+| 15 | 328  |
+| 16 | 366  |
+| 17 | 368  |
+| 19 | 360  |
+| 21 | 408  |
+| 22 | 321  |
+| 23 | 372  |
+| 25 | 409  |
+| 26 | 392  |
+| 27 | 376  |
+| 28 | 382  |
+| 29 | 344  |
+| 30 | 383  |
 
-      UCI HAR Dataset                 [this should be your working directory]
-           /test  
-               /Inertial Signals      [can delete]
-           /train
-              /Inertial Signals       [can delete]
-    
 
-In R, run the file, “run_analysis.R”.
-This will produce the tidy date text file called “humanActivityData.txt” in the “UCI HAR Dataset” directory.
+*File: ./train/Y_train.txt*
 
-Refer to CodeBook.md for information about the data, the tidy data set variables and the transformation process.
+Variables:
 
+V1 - Integer (1-6) representing the training activity that was being measured. Maps to corresponding measurement row in ./train/X_train.txt
+
+*Raw Data Variables with All Values summarized by Count using R command:data.frame(t(table(read.table("./train/Y_train.txt"))))*
+
+| V1 | Freq |
+|----|------|
+| 1  | 1226 |
+| 2  | 1073 |
+| 3  | 986  |
+| 4  | 1286 |
+| 5  | 1374 |
+| 6  | 1407 |
+
+*File: ./train/X_train.txt*
+
+Variables:
+
+V1 - Measurement corresponding to one of the 561 features + subject + activity for the training set data.  Measurement is a number between -1 and 1 with 8 digits after the decimal
+
+V2 - ...
+
+...
+
+V561 -  ...
+
+*Sample Values:*
+
+| V1        | V2          | … | … | V561        |
+|-----------|-------------|---|---|-------------|
+| 0.2885845 | -0.02029417 |   |   | -0.05862692 |
+| …         | …           | … | … | …           |
+
+
+*File: subject_test.txt*
+
+Variables:
+
+V1 - Integer (1 to 30) representing testing subject who was being measured. Maps to corresponding measurement row in ./test/X_test.txt
+
+*Raw Data Variables with All Values summarized by Count using R command:data.frame(t(table(read.table("./test/subject_test.txt"))))*
+
+| V1 | Freq |
+|----|------|
+| 2  | 302  |
+| 4  | 317  |
+| 9  | 288  |
+| 10 | 294  |
+| 12 | 320  |
+| 13 | 327  |
+| 18 | 364  |
+| 20 | 354  |
+| 24 | 381  |
+*Files: ./test/Y_test.txt*  and *./test/X_test.txt* are the same structures and data types as *./train/Y_train.txt* and *./train/X_train.txt*
+
+
+# Output Data -- Tidy Data Set:
+
+*File: humanActivityData.txt*
+
+Variables:
+
+signal_desc -
+
+function_var -
+
+activity -
+
+subject -
+
+mean -
+
+
+
+# Transformation Instructions 
+## Raw data > Tidy Data 
+
+Note: for detailed step-by-step code, refer to run_analysis.R 
+
+**1. Merge the training and the test sets to create one data set. **
+
+1. install packages:  data.table and plyr 
+2. load the 8 ACL files documented in README.md
+3. Add the following columns to the Training Data Set:  "group" with a value of "Training Data", "subject" with the subject id corresponding to the measurements and "activity_id" with the activity number corresponding to the measurements
+4. Add the following columns to the Testing Set data:  "group" with a value of "Testing Data", "subject" with the subject id corresponding to the measurements and "activity_id" with the activity number corresponding to the measurements
+5. Combine both the Training and Testing Data Sets into 1 data frame called *smartphoneData* which has 564 columns and 10299 rows
+
+**2.  Extract only the measurements on the mean and standard deviation for each measurement. **
+
+1. Extract the column names from smartphoneData that contain the characters mean() and std() and create 1 vector with 66 columns containing all of the mean + std column names
+2. Create a subset of smartphoneData called*phoneData* that only contains the mean and std measurements. It will have 69 columns and 10299 rows.
+3. Create a data frame called *signalData* by reshaping phoneData from wide to long. It will have 6 columns and 679,734 rows.
+
+**3.  Use descriptive activity names to name the activities in the data set. **
+
+1. Merge the data frame containing the activity labels (i.e., WALKING, STANDING, etc.) with signalData to add a column with the activity description.
+
+**4.  Appropriately labels the data set with descriptive variable names.. **
+
+1. Create a data frame called *mdf* that contains all 66 mean/std features.
+2. De-construct the feature name to isolate the values for signal (i.e., BodyGyro JerkMag) + feature_var (Mean vs Standard Deviation) + Axis (X, Y, Z or NA)
+3. Create a data frame that maps the existing signal with a more descriptive term (i.e., Body Jerk = Jerk of the Body, etc.)
+4.  Merge the data frame containing the descriptive signals with mdf and create a new *tidy* data frame called *signalData* containing only the descriptive variables.
+
+Variables:
+
+orig_signal
+
+function_var
+
+signal_desc
+
+activity
+
+group
+
+subject
+
+value 
 

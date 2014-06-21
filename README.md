@@ -28,7 +28,7 @@ From ACL
 Created for CHAP
 
 1. run_analysis.R -- Code used to transform the Raw Data and produce the tidy data set: humanActivityData.txt
-2. humanActivityData.txt -- Tidy data set produced by raw data transformation processed in run_analysis.R
+2. humanActivityData.txt -- Tidy data set produced by raw data transformation processed in run_analysis.R -- Headers are included
 3. CodeBook.md -- Describes the variables, data and transformations
 
  
@@ -76,7 +76,10 @@ ACL File Directory Structure:
     
 
 In R, run the file, “run_analysis.R”.
-This will produce the tidy date text file called “humanActivityData.txt” in the “UCI HAR Dataset” directory.
+This will produce the tidy date text file called “humanActivityData.txt” in your working directory.
+
+To load “humanActivityData.txt” into R, make sure that the file is in your working directory and run the following command:
+*write.table(meanSubActFunSig,file="humanActivityData.txt",row.names=FALSE, col.names=TRUE, sep=" ")*
 
 Refer to CodeBook.md for information about the data, the tidy data set variables and the transformation process.
 
