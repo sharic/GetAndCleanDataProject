@@ -14,7 +14,7 @@ Variables:
 
 V1 - Unique integer representing 1 of 6 types of activity performed by the subjects 
 
-V2 - Activity Name, text
+V2 - Activity Name (text)
 
 *Full Data Set:*
 
@@ -36,7 +36,9 @@ V1 - Unique integer representing the 561 measurements taken with either an accel
 
 V2 - Each measurement description (text) represents:
 + Device (accelerometer or gyroscope) that took the measurement +
-+ Signal being measured ++ Axial direction of the signal if applicable ++ Time domain signal vs frequency domain signal ++ Variables (function) that was estimated from the signal*Sample Values:*
++ Signal being measured ++ Axial direction of the signal if applicable ++ Time domain signal vs frequency domain signal ++ Variables (function) that was estimated from the signal
+
+*Sample Values:*
 
 | V1  | V2                   |
 |-----|----------------------|
@@ -51,6 +53,70 @@ V2 - Each measurement description (text) represents:
 | 504 | fBodyAccMag-std()    |
 | …   | …                    |
 | 561 | …                    |
+
+
+The following definition of the measurement units is taken from the ACL documentation file **features_info.txt**.
+
+> The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+> Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+> Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals). 
+
+>  These signals were used to estimate variables of the feature vector for each pattern:  '-XYZ' is used to denote 3-axial signals in the X, Y and Z directions.
+
+> | signals     |
+|-------------------|
+| tBodyAcc-XYZ |
+| tGravityAcc-XYZ   |
+| tBodyAccJerk-XYZ  |
+| tBodyGyro-XYZ     |
+| tBodyGyroJerk-XYZ |
+| tBodyAccMag       |
+| tGravityAccMag    |
+| tBodyAccJerkMag   |
+| tBodyGyroMag      |
+| tBodyGyroJerkMag  |
+| fBodyAcc-XYZ      |
+| fBodyAccJerk-XYZ  |
+| fBodyGyro-XYZ     |
+| fBodyAccMag       |
+| fBodyAccJerkMag   |
+| fBodyGyroMag      |
+| fBodyGyroJerkMag  |
+
+> The set of variables that were estimated from these signals are: 
+
+>| Var        | Description                                                                   |
+|---------------|------------------------------------------------------------------------------|
+| mean()        | Mean value                                                                   |
+| std()         | Standard deviation                                                           |
+| mad()         | Median absolute deviation                                                    |
+| max()         | Largest value in array                                                       |
+| min()         | Smallest value in array                                                      |
+| sma()         | Signal magnitude area                                                        |
+| energy()      | Energy measure. Sum of the squares divided by the number of values.          |
+| iqr()         | Interquartile range                                                          |
+| entropy()     | Signal entropy                                                               |
+| arCoeff()     | Autorregresion coefficients with Burg order equal to 4                       |
+| correlation() | correlation coefficient between two signals                                  |
+| maxInds()     | index of the frequency component with largest magnitude                      |
+| meanFreq()    | Weighted average of the frequency components to obtain a mean frequency      |
+| skewness()    | skewness of the frequency domain signal                                      |
+| kurtosis()    | kurtosis of the frequency domain signal                                      |
+| bandsEnergy() | Energy of a frequency interval within the 64 bins of the FFT of each window. |
+| angle()       | Angle between to vectors.                                  
+
+
+> Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
+
+>| Addl       |
+|-------------------|
+| gravityMean       |
+| tBodyAccMean      |
+| tBodyAccJerkMean  |
+| tBodyGyroMean     |
+| tBodyGyroJerkMean |
 
 
 
@@ -106,7 +172,7 @@ V1 - Integer (1-6) representing the training activity that was being measured. M
 
 Variables:
 
-V1 - Measurement corresponding to one of the 561 features + subject + activity for the training set data.  Measurement is a number between -1 and 1 with 8 digits after the decimal
+V1 - Measurement corresponding to one of the 561 features + subject + activity for the training set data (see *features.txt* file for information about measurement process and units).  Measurement is a number between -1 and 1 with 8 digits after the decimal
 
 V2 - ...
 
@@ -192,19 +258,17 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 3. Create a data frame that maps the existing signal with a more descriptive term (i.e., Body Jerk = Jerk of the Body, etc.)
 4.  Merge the data frame containing the descriptive signals with mdf and create a new *tidy* data frame called *signalData* containing only the descriptive variables.
 
-Variables:
+Tidy Data Set Variables:
 
-orig_signal
+| VARIABLE     | DESCRIPTION                                                                                                                                            | EXAMPLE                                       |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
+| orig_signal  | Un-altered “feature” value that contained either “mean()” or “std()” from raw data set                                                                 | i.e., fBodyAcc-mean()-X, tBodyGyro-std()-Y, … |
+| function_var | If orig_signal contained “mean()” or “std()”                                                                                                           | Mean or Standard Deviation                    |
+| signal_desc  | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., Body on the X-axis, Body on the Y-axis  |
+| activity     | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken                                                       | i.e., SITTING, LAYING, …                      |
+| group        | If measurement was part of the Training or Testing Group                                                                                               | Training Data or Testing Data                 |
+| subject      | Integer between 1 and 30  indicating which subject was being measured                                                                                  | i.e., 1,2,3,4,…                               |
+| value        | Measurement value in units described under *File: features.txt* above. Values range from -1 to 1 with 8 digits after the decimal                       | -0.99338166, 0.350949780, …                   |
 
-function_var
 
-signal_desc
-
-activity
-
-group
-
-subject
-
-value 
 
