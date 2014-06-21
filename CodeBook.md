@@ -233,7 +233,7 @@ mean -
 
 Note: for detailed step-by-step code, refer to run_analysis.R 
 
-**1. Merge the training and the test sets to create one data set. **
+**1. Merge the training and the test sets to create one data set.**
 
 1. install packages:  data.table and plyr 
 2. load the 8 ACL files documented in README.md
@@ -241,7 +241,7 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 4. Add the following columns to the Testing Set data:  "group" with a value of "Testing Data", "subject" with the subject id corresponding to the measurements and "activity_id" with the activity number corresponding to the measurements
 5. Combine both the Training and Testing Data Sets into 1 data frame called *smartphoneData* which has 564 columns and 10299 rows
 
-**2.  Extract only the measurements on the mean and standard deviation for each measurement. **
+**2.  Extract only the measurements on the mean and standard deviation for each measurement.**
 
 1. Extract the column names from smartphoneData that contain the characters mean() and std() and create 1 vector with 66 columns containing all of the mean + std column names
 2. Create a subset of smartphoneData called*phoneData* that only contains the mean and std measurements. It will have 69 columns and 10299 rows.
@@ -251,7 +251,7 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 
 1. Merge the data frame containing the activity labels (i.e., WALKING, STANDING, etc.) with signalData to add a column with the activity description.
 
-**4.  Appropriately labels the data set with descriptive variable names.. **
+**4.  Appropriately labels the data set with descriptive variable names..**
 
 1. Create a data frame called *mdf* that contains all 66 mean/std features.
 2. De-construct the feature name to isolate the values for signal (i.e., BodyGyro JerkMag) + feature_var (Mean vs Standard Deviation) + Axis (X, Y, Z or NA)
