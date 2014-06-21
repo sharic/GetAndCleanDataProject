@@ -115,7 +115,6 @@ The following definition of the measurement units is taken from the ACL document
 
 > Additional vectors obtained by averaging the signals in a signal window sample. These are used on the angle() variable:
 
-<<<<<<< HEAD
 >| Addl       |
 |-------------------|
 | gravityMean       |
@@ -513,4 +512,3 @@ Second Tidy Data Set Columns:
 | activity     | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., SITTING, LAYING, …                     |
 | subject      | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken                                                       | i.e., 1,2,3,4,…                              |
 | mean         | Calculated mean value between -1 and 1 and rounded to 4 digits.                                                                                        | -0.8602, 0.0438, …                           |
->>>>>>> FETCH_HEAD
