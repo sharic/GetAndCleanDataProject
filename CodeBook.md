@@ -210,23 +210,6 @@ V1 - Integer (1 to 30) representing testing subject who was being measured. Maps
 *Files: ./test/Y_test.txt*  and *./test/X_test.txt* are the same structures and data types as *./train/Y_train.txt* and *./train/X_train.txt*
 
 
-# Output Data -- Tidy Data Set:
-
-*File: humanActivityData.txt*
-
-Variables:
-
-signal_desc -
-
-function_var -
-
-activity -
-
-subject -
-
-mean -
-
-
 
 # Transformation Instructions 
 ## Raw data > Tidy Data 
@@ -237,8 +220,22 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 
 1. install packages:  data.table and plyr 
 2. load the 8 ACL files documented in README.md
-3. Add the following columns to the Training Data Set:  "group" with a value of "Training Data", "subject" with the subject id corresponding to the measurements and "activity_id" with the activity number corresponding to the measurements
-4. Add the following columns to the Testing Set data:  "group" with a value of "Testing Data", "subject" with the subject id corresponding to the measurements and "activity_id" with the activity number corresponding to the measurements
+3. Add the following columns to the Training Data Set:  
+
+	<dd>- "group" with a value of "Training Data" + </dd>
+	<dd>- "subject" with the subject id corresponding to the measurements </dd>
+	<dd>- "activity_id" with the activity number corresponding to the measurements
+</dd>
+
+
+4. Add the following columns to the Testing Set data: 
+
+	<dd>- "group" with a value of "Testing Data" + </dd>
+	<dd>- "subject" with the subject id corresponding to the measurements </dd>
+	<dd>- "activity_id" with the activity number corresponding to the measurements
+</dd>
+
+
 5. Combine both the Training and Testing Data Sets into 1 data frame called *smartphoneData* which has 564 columns and 10299 rows
 
 **2.  Extract only the measurements on the mean and standard deviation for each measurement.**
@@ -247,7 +244,7 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 2. Create a subset of smartphoneData called*phoneData* that only contains the mean and std measurements. It will have 69 columns and 10299 rows.
 3. Create a data frame called *signalData* by reshaping phoneData from wide to long. It will have 6 columns and 679,734 rows.
 
-**3.  Use descriptive activity names to name the activities in the data set. **
+**3.  Use descriptive activity names to name the activities in the data set.**
 
 1. Merge the data frame containing the activity labels (i.e., WALKING, STANDING, etc.) with signalData to add a column with the activity description.
 
@@ -260,7 +257,7 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 
 Tidy Data Set Variables:
 
-| VARIABLE     | DESCRIPTION                                                                                                                                            | EXAMPLE                                       |
+| VARIABLE     | DESCRIPTION                                                                                                                                            | EXAMPLES                                       |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | orig_signal  | Un-altered “feature” value that contained either “mean()” or “std()” from raw data set                                                                 | i.e., fBodyAcc-mean()-X, tBodyGyro-std()-Y, … |
 | function_var | If orig_signal contained “mean()” or “std()”                                                                                                           | Mean or Standard Deviation                    |
@@ -271,4 +268,30 @@ Tidy Data Set Variables:
 | value        | Measurement value in units described under *File: features.txt* above. Values range from -1 to 1 with 8 digits after the decimal                       | -0.99338166, 0.350949780, …                   |
 
 
+**5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
 
+
+1. Using ddply, calculate the mean of all measurements from the *signalData* tidy data set completed in *Step 4.*  and group the mean values by the following variables:
+
+
+	<dd>- Signal Description (i.e., Body on the Y-axis ) + </dd>
+	<dd>- Original Function (Mean vs SD) + </dd>
+	<dd>- Activity (Standing, etc.) +</dd>
+	<dd>- Subject (#1, #2, etc.)</dd>
+
+
+2. Order the resulting tidy data frame set called *meanSubActFunSig*  by Subject, Signal, Description, Original Function and Activity.
+3. Write the contents of meanSubActFunSig to **File: humanActivityData.txt** [see next/final section of Code Book]
+
+
+# Final Output Data -- Tidy Data Set:
+
+*File: humanActivityData.txt*
+
+| VARIABLE     | DESCRIPTION                                                                                                                                            | EXAMPLE                                      |
+|--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
+| signal_desc  | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., Body on the X-axis, Body on the Y-axis |
+| function_var | If orig_signal contained “mean()” or “std()”                                                                                                           | Mean or Standard Deviation                   |
+| activity     | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., SITTING, LAYING, …                     |
+| subject      | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken                                                       | i.e., 1,2,3,4,…                              |
+| mean         | Calculated mean value between -1 and 1 and rounded to 4 digits.                                                                                        | -0.8602, 0.0438, …                           |
