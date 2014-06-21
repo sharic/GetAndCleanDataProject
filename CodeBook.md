@@ -272,7 +272,7 @@ First Tidy Data Set Columns:
 
  Note: Based on the instructions in Step #5, I made the following choices:
 
-> -  Begin with the tidy data set produced in Step #4 instead to the original data set containing the full set of measurements.  this meant that the measurements to be used in the calculation for average were either originally a "mean" or a "standard deviation" measurement. 
+> -  Begin with the tidy data set produced in Step #4 instead to the original data set containing the full set of measurements.  This meant that the measurements to be used in the calculation for average were either originally a "mean" or a "standard deviation" measurement. 
 - Because I would be only averaging across "mean" and "standard deviation" measurements, the logical choice was to include the original measurement type (mean vs SD )as one of the variables to group by. This variable is called function_var in the data set. Therefore, the final mean value in the data set is either a mean value of a number of other Mean measurements or a mean value of Standard Deviation measurements.
 - As a result of these choices, I took the average (i.e., mean) across (i.e., grouped by) 4 different variables which are described below
 
