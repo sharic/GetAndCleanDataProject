@@ -12,19 +12,25 @@ The ADL study data was obtained from UC Irvine, and more information can be obta
  <http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones>
  
 
-**Files Used**
+**Files**
 
-1. activity_labels.txt
-2. features.txt 
-3. subject_train.txt 
-4. Y_train.txt 
-5. X_train.txt 
-6. subject_test.txt 
-7. Y_test.txt 
-8. X_test.txt 
-9. run_analysis.R
-10. humanActivityData.txt
-11. CodeBook.md
+From ACL
+
+1. activity_labels.txt -- Links the 6 class labels with their activity name. (i.e., Walking, etc.)
+2. features.txt -- List of all features. (i.e., tBodyAcc-mean()-X, tBodyAcc-iqr()-Z, fBodyAcc-bandsEnergy()-1,8  etc.)
+3. subject_train.txt -- Each row identifies the training subject who performed the activity for each window sample. Its range is from 1 to 30.
+4. Y_train.txt -- Training labels. (1-6 mapping to activity_labels.txt data)
+5. X_train.txt -- Features training set data  -- normalized and bounded within [-1,1]
+6. subject_test.txt -- Each row identifies the testing subject who performed the activity for each window sample. Its range is from 1 to 30.
+7. Y_test.txt -- Test labels. (1-6 mapping to activity_labels.txt data)
+8. X_test.txt -- Features testing set data  -- normalized and bounded within [-1,1]
+
+Created for CHAP
+
+1. run_analysis.R -- Code used to transform the Raw Data and produce the tidy data set: humanActivityData.txt
+2. humanActivityData.txt -- Tidy data set produced by raw data transformation processed in run_analysis.R
+3. CodeBook.md -- Describes the variables, data and transformations
+
  
 **Downloading**
 
