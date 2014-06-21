@@ -8,9 +8,9 @@ Coursera: Human Activity Project (CHAP)
 # Input Data:
 
 
-*File: activity_labels.txt*
+**File: activity_labels.txt**
 
-Variables:
+Columns:
 
 V1 - Unique integer representing 1 of 6 types of activity performed by the subjects 
 
@@ -28,9 +28,9 @@ V2 - Activity Name (text)
 | 6  | LAYING             |
 
 
-*File: features.txt*
+**File: features.txt**
 
-Variables:
+Columns:
 
 V1 - Unique integer representing the 561 measurements taken with either an accelerometer or a gyroscope
 
@@ -120,9 +120,9 @@ The following definition of the measurement units is taken from the ACL document
 
 
 
-*File: subject_train.txt*
+**File: subject_train.txt**
 
-Variables:
+Columns:
 
 V1 - Integer (1 to 30) representing training subject who was being measured. Maps to corresponding measurement row in ./train/X_train.txt
 
@@ -151,9 +151,9 @@ V1 - Integer (1 to 30) representing training subject who was being measured. Map
 | 30 | 383  |
 
 
-*File: ./train/Y_train.txt*
+**File: ./train/Y_train.txt**
 
-Variables:
+Columns:
 
 V1 - Integer (1-6) representing the training activity that was being measured. Maps to corresponding measurement row in ./train/X_train.txt
 
@@ -168,9 +168,9 @@ V1 - Integer (1-6) representing the training activity that was being measured. M
 | 5  | 1374 |
 | 6  | 1407 |
 
-*File: ./train/X_train.txt*
+**File: ./train/X_train.txt**
 
-Variables:
+Columns:
 
 V1 - Measurement corresponding to one of the 561 features + subject + activity for the training set data (see *features.txt* file for information about measurement process and units).  Measurement is a number between -1 and 1 with 8 digits after the decimal
 
@@ -188,9 +188,9 @@ V561 -  ...
 | …         | …           | … | … | …           |
 
 
-*File: subject_test.txt*
+**File: subject_test.txt**
 
-Variables:
+Columns:
 
 V1 - Integer (1 to 30) representing testing subject who was being measured. Maps to corresponding measurement row in ./test/X_test.txt
 
@@ -253,9 +253,9 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 1. Create a data frame called *mdf* that contains all 66 mean/std features.
 2. De-construct the feature name to isolate the values for signal (i.e., BodyGyro JerkMag) + feature_var (Mean vs Standard Deviation) + Axis (X, Y, Z or NA)
 3. Create a data frame that maps the existing signal with a more descriptive term (i.e., Body Jerk = Jerk of the Body, etc.)
-4.  Merge the data frame containing the descriptive signals with mdf and create a new *tidy* data frame called *signalData* containing only the descriptive variables.
+4.  Merge the data frame containing the descriptive signals with mdf and create a new *tidy* data frame called *signalData* containing only the descriptive variables. Data set has 7 columns and 679,734 rows.
 
-Tidy Data Set Variables:
+First Tidy Data Set Columns:
 
 | VARIABLE     | DESCRIPTION                                                                                                                                            | EXAMPLES                                       |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
@@ -270,23 +270,32 @@ Tidy Data Set Variables:
 
 **5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
 
+ Note: Based on the instructions in Step #5, I made the following choices:
+
+> -  Begin with the tidy data set produced in Step #4 instead to the original data set containing the full set of measurements.  this meant that the measurements to be used in the calculation for average were either originally a "mean" or a "standard deviation" measurement. 
+- Because I would be only averaging across "mean" and "standard deviation" measurements, the logical choice was to include the original measurement type (mean vs SD )as one of the variables to group by. This variable is called function_var in the data set. Therefore, the final mean value in the data set is either a mean value of a number of other Mean measurements or a mean value of Standard Deviation measurements.
+- As a result of these choices, I took the average (i.e., mean) across (i.e., grouped by) 4 different variables which are described below
+
+
+
 
 1. Using ddply, calculate the mean of all measurements from the *signalData* tidy data set completed in *Step 4.*  and group the mean values by the following variables:
 
-
-	<dd>- Signal Description (i.e., Body on the Y-axis ) + </dd>
-	<dd>- Original Function (Mean vs SD) + </dd>
+	<dd>- Signal Description (i.e., Body on the Y-axis, ... ) + </dd>
+	<dd>- Original Function Measurement (Mean or Standard Deviation) + </dd>
 	<dd>- Activity (Standing, etc.) +</dd>
-	<dd>- Subject (#1, #2, etc.)</dd>
+	<dd>- Subject Identifier (#1, #2, etc.)</dd>
 
 
-2. Order the resulting tidy data frame set called *meanSubActFunSig*  by Subject, Signal, Description, Original Function and Activity.
+2. Order the resulting tidy data frame set called *meanSubActFunSig*  by Subject, Signal, Description, Original Function and Activity. Data set has 5 columns and 4320 rows
 3. Write the contents of meanSubActFunSig to **File: humanActivityData.txt** [see next/final section of Code Book]
 
 
 # Final Output Data -- Tidy Data Set:
 
-*File: humanActivityData.txt*
+**File: humanActivityData.txt**
+
+Second Tidy Data Set Columns:
 
 | VARIABLE     | DESCRIPTION                                                                                                                                            | EXAMPLE                                      |
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
