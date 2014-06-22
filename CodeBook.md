@@ -301,3 +301,4 @@ Second Tidy Data Set Columns:
 | function_var | If orig_signal contained “mean()” or “std()”                                                                                                           | Mean or Standard Deviation                   |
 | activity     | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken. | i.e., SITTING, LAYING, …                     |
 | subject      | Integer between 1 and 30 indicating which subject was being measured                             | i.e., 1,2,3,4,…                              |
+| mean      | Mean/Average of Signal Description + Original Function Measurement + Activity + Subject.   Values range from -1 to 1 and are rounded to 4 digits after the decimal                         | -0.8602, 0.9319, …                              |
