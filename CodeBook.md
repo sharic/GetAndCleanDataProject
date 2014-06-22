@@ -273,7 +273,7 @@ First Tidy Data Set Columns:
 | value        | Measurement value in units described under *File: features.txt* above. Values range from -1 to 1 with 8 digits after the decimal                       | -0.99338166, 0.350949780, …                   |
 
 
-**5. Creates a second, independent tidy data set with the average of each variable for each activity and each subject.**
+**5. Create a second, independent tidy data set with the average of each variable for each activity and each subject.**
 
  Note: Based on the instructions in Step #5, I made the following choices:
 
