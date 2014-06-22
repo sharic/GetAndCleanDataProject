@@ -4,63 +4,9 @@ Code Book
 Coursera: Human Activity Project (CHAP)
 
 
+# ACL Study:
 
-# Input Data:
-
-
-**File: activity_labels.txt**
-
-Columns:
-
-V1 - Unique integer representing 1 of 6 types of activity performed by the subjects 
-
-V2 - Activity Name (text)
-
-*Full Data Set:*
-
-| V1 | V2                 |
-|----|--------------------|
-| 1  | WALKING            |
-| 2  | WALKING_UPSTAIRS   |
-| 3  | WALKING_DOWNSTAIRS |
-| 4  | SITTING            |
-| 5  | STANDING           |
-| 6  | LAYING             |
-
-
-
-**File: features.txt**
-
-Columns:
-
-V1 - Unique integer representing the 561 measurements taken with either an accelerometer or a gyroscope
-
-V2 - Each measurement description (text) represents:
-
-+ Device (accelerometer or gyroscope) that took the measurement +
-+ Signal being measured +
-+ Axial direction of the signal if applicable +
-+ Time domain signal vs frequency domain signal +
-+ Variables (function) that was estimated from the signal
-
-*Sample Values:*
-
-| V1  | V2                   |
-|-----|----------------------|
-| 1   | tBodyAcc-mean()-X    |
-| 2   | tBodyAcc-mean()-Y    |
-| 3   | tBodyAcc-mean()-Z    |
-| …   | …                    |
-| 137 | tBodyGyro-energy()-X |
-| 138 | tBodyGyro-energy()-Y |
-| 138 | tBodyGyro-energy()-Z |
-|     |                      |
-| 504 | fBodyAccMag-std()    |
-| …   | …                    |
-| 561 | …                    |
-
-
-The following definition of the measurement units is taken from the ACL documentation file **features_info.txt**.
+The following text explains the process, variables and measurement units used in the ACL study. It is taken from the ACL documentation file **features_info.txt**.
 
 > The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
 
@@ -124,6 +70,60 @@ The following definition of the measurement units is taken from the ACL document
 | tBodyGyroJerkMean |
 
 
+# Input Data from ACL Files:
+
+
+**File: activity_labels.txt**
+
+Columns:
+
+V1 - Unique integer representing 1 of 6 types of activity performed by the subjects 
+
+V2 - Activity Name (text)
+
+*Full Data Set:*
+
+| V1 | V2                 |
+|----|--------------------|
+| 1  | WALKING            |
+| 2  | WALKING_UPSTAIRS   |
+| 3  | WALKING_DOWNSTAIRS |
+| 4  | SITTING            |
+| 5  | STANDING           |
+| 6  | LAYING             |
+
+
+
+**File: features.txt**
+
+Columns:
+
+V1 - Unique integer representing the 561 measurements taken with either an accelerometer or a gyroscope
+
+V2 - Each measurement description (text) represents:
+
++ Device (accelerometer or gyroscope) that took the measurement +
++ Signal being measured +
++ Axial direction of the signal if applicable +
++ Time domain signal vs frequency domain signal +
++ Variables (function) that was estimated from the signal
+
+*Sample Values:*
+
+| V1  | V2                   |
+|-----|----------------------|
+| 1   | tBodyAcc-mean()-X    |
+| 2   | tBodyAcc-mean()-Y    |
+| 3   | tBodyAcc-mean()-Z    |
+| …   | …                    |
+| 137 | tBodyGyro-energy()-X |
+| 138 | tBodyGyro-energy()-Y |
+| 139 | tBodyGyro-energy()-Z |
+| …   | …                    |
+| 504 | fBodyAccMag-std()    |
+| …   | …                    |
+| 561 | …                    |
+
 
 **File: subject_train.txt**
 
@@ -177,7 +177,7 @@ V1 - Integer (1-6) representing the training activity that was being measured. M
 
 Columns:
 
-V1 - Measurement corresponding to one of the 561 features + subject + activity for the training set data (see *features.txt* file for information about measurement process and units).  Measurement is a number between -1 and 1 with 8 digits after the decimal
+V1 - Measurement corresponding to one of the 561 features + subject + activity for the training set data. Measurement is a number between -1 and 1 with 8 digits after the decimal.  (see *features.txt* file for list of features. See *ACL Study* section at beginning of Code Book for description of variables units.) 
 
 V2 - ...
 
@@ -246,19 +246,19 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 **2.  Extract only the measurements on the mean and standard deviation for each measurement.**
 
 1. Extract the column names from smartphoneData that contain the characters mean() and std() and create 1 vector with 66 columns containing all of the mean + std column names
-2. Create a subset of smartphoneData called*phoneData* that only contains the mean and std measurements. It will have 69 columns and 10299 rows.
+2. Create a subset of smartphoneData called *phoneData* that only contains the mean and std measurements. It will have 69 columns and 10,299 rows.
 3. Create a data frame called *signalData* by reshaping phoneData from wide to long. It will have 6 columns and 679,734 rows.
 
 **3.  Use descriptive activity names to name the activities in the data set.**
 
 1. Merge the data frame containing the activity labels (i.e., WALKING, STANDING, etc.) with signalData to add a column with the activity description.
 
-**4.  Appropriately labels the data set with descriptive variable names..**
+**4.  Appropriately label the data set with descriptive variable names..**
 
 1. Create a data frame called *mdf* that contains all 66 mean/std features.
-2. De-construct the feature name to isolate the values for signal (i.e., BodyGyro JerkMag) + feature_var (Mean vs Standard Deviation) + Axis (X, Y, Z or NA)
+2. De-construct the feature name to isolate the values for signal (i.e., BodyJerk) + feature_var (Mean vs Standard Deviation) + Axis (X, Y, Z or NA)
 3. Create a data frame that maps the existing signal with a more descriptive term (i.e., Body Jerk = Jerk of the Body, etc.)
-4.  Merge the data frame containing the descriptive signals with mdf and create a new *tidy* data frame called *signalData* containing only the descriptive variables. Data set has 7 columns and 679,734 rows.
+4. Merge the data frame containing the descriptive signals with mdf and create a new *tidy* data frame called *signalData* containing only the descriptive variables. Data set has 7 columns and 679,734 rows.
 
 First Tidy Data Set Columns:
 
@@ -266,21 +266,16 @@ First Tidy Data Set Columns:
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------|
 | orig_signal  | Un-altered “feature” value that contained either “mean()” or “std()” from raw data set                                                                 | i.e., fBodyAcc-mean()-X, tBodyGyro-std()-Y, … |
 | function_var | If orig_signal contained “mean()” or “std()”                                                                                                           | Mean or Standard Deviation                    |
-| signal_desc  | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., Body on the X-axis, Body on the Y-axis  |
+| signal_desc  | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed, and the axis (if applic) has been added | i.e., Body on the X-axis, Body on the Y-axis  |
 | activity     | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken                                                       | i.e., SITTING, LAYING, …                      |
 | group        | If measurement was part of the Training or Testing Group                                                                                               | Training Data or Testing Data                 |
 | subject      | Integer between 1 and 30  indicating which subject was being measured                                                                                  | i.e., 1,2,3,4,…                               |
-| value        | Measurement value in units described under *File: features.txt* above. Values range from -1 to 1 with 8 digits after the decimal                       | -0.99338166, 0.350949780, …                   |
+| value        | Measurement value in units described in the beginning of the Code Book. Values range from -1 to 1 with 8 digits after the decimal                       | -0.9933816, 0.3509497, …                   |
 
 
 **5. Create a second, independent tidy data set with the average of each variable for each activity and each subject.**
 
- Note: Based on the instructions in Step #5, I made the following choices:
-
-> -  Begin with the tidy data set produced in Step #4 instead to the original data set containing the full set of measurements.  This meant that the measurements to be used in the calculation for average were either originally a "mean" or a "standard deviation" measurement. 
-- Because I would be only averaging across "mean" and "standard deviation" measurements, the logical choice was to include the original measurement type (mean vs SD )as one of the variables to group by. This variable is called function_var in the data set. Therefore, the final mean value in the data set is either a mean value of a number of other Mean measurements or a mean value of Standard Deviation measurements.
-- As a result of these choices, I took the average (i.e., mean) across (i.e., grouped by) 4 different variables which are described below
-
+PLEASE SEE ASSUMPTIONS AND CHOICES MADE IN README UNDER  **Project Assumptions**.
 
 1. Using ddply, calculate the mean of all measurements from the *signalData* tidy data set completed in *Step 4.*  and group the mean values by the following variables:
 
@@ -304,5 +299,5 @@ Second Tidy Data Set Columns:
 |--------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------|
 | signal_desc  | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., Body on the X-axis, Body on the Y-axis |
 | function_var | If orig_signal contained “mean()” or “std()”                                                                                                           | Mean or Standard Deviation                   |
-| activity     | Descriptive text for the orig_signal and the axis, if applicable. Note that the time/frequency and accelerator/gyroscope indicators have been removed. | i.e., SITTING, LAYING, …                     |
-| subject      | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken                                                       | i.e., 1,2,3,4,…                              |
+| activity     | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken. | i.e., SITTING, LAYING, …                     |
+| subject      | Integer between 1 and 30 indicating which subject was being measured                             | i.e., 1,2,3,4,…                              |
