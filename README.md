@@ -13,7 +13,7 @@ The ADL study data was obtained from UC Irvine, and more information can be obta
  
 **CHAP Project**
 
-The following project description is taken from the **Getting and Cleaning Data** Class at Coursera.org. <https://class.coursera.org/getdata-004>
+The following project description is taken from the **Getting and Cleaning Data** Class at Coursera.org. <https://class.coursera.org/getdata-004/human_grading/view/courses/972137/assessments/3/submissions>
 
 >The purpose of this project is to demonstrate your ability to collect, work with, and clean a data set. The goal is to prepare tidy data that can be used for later analysis.
 >
