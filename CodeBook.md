@@ -4,7 +4,7 @@ Code Book
 Coursera: Human Activity Project (CHAP)
 
 
-**ACL Study:**
+##ACL Study:
 
 The following text explains the process, variables and measurement units used in the ACL study. It is taken from the ACL documentation file **features_info.txt**.
 
@@ -70,7 +70,7 @@ The following text explains the process, variables and measurement units used in
 | tBodyGyroJerkMean |
 
 
-**Input Data from ACL Files:**
+##Input Data from ACL Files:
 
 
 **File: activity_labels.txt**
@@ -216,8 +216,8 @@ V1 - Integer (1 to 30) representing testing subject who was being measured. Maps
 
 
 
-**Transformation Instructions**
-**Raw data > Tidy Data**
+##Transformation Instructions
+###Raw data > Tidy Data**
 
 Note: for detailed step-by-step code, refer to run_analysis.R 
 
@@ -289,7 +289,7 @@ PLEASE SEE ASSUMPTIONS AND CHOICES MADE IN README UNDER  **Project Assumptions**
 3. Write the contents of meanSubActFunSig to **File: humanActivityData.txt** [see next/final section of Code Book]
 
 
-**Final Output Data -- Tidy Data Set:**
+##Final Output Data -- Tidy Data Set:
 
 **File: humanActivityData.txt**
 
