@@ -217,7 +217,7 @@ V1 - Integer (1 to 30) representing testing subject who was being measured. Maps
 
 
 ##Transformation Instructions
-###Raw data > Tidy Data**
+###Raw data > Tidy Data
 
 Note: for detailed step-by-step code, refer to run_analysis.R 
 
@@ -241,7 +241,7 @@ Note: for detailed step-by-step code, refer to run_analysis.R
 </dd>
 
 
-5. Combine both the Training and Testing Data Sets into 1 data frame called *smartphoneData* which has 564 columns and 10299 rows
+5. Combine both the Training and Testing Data Sets into 1 data frame called *smartphoneData* which has 564 columns and 10,299 rows
 
 **2.  Extract only the measurements on the mean and standard deviation for each measurement.**
 
@@ -270,7 +270,7 @@ First Tidy Data Set Columns:
 | activity     | Descriptive text for 1 of the 6 activities being performed by subject when measurement was taken                                                       | i.e., SITTING, LAYING, …                      |
 | group        | If measurement was part of the Training or Testing Group                                                                                               | Training Data or Testing Data                 |
 | subject      | Integer between 1 and 30  indicating which subject was being measured                                                                                  | i.e., 1,2,3,4,…                               |
-| value        | Measurement value in units described in the beginning of the Code Book. Values range from -1 to 1 with 8 digits after the decimal                       | -0.9933816, 0.3509497, …                   |
+| value        | Measurement value in units described in the beginning of the Code Book. Values range from -1 to 1 with 8 digits after the decimal                       | -0.99338166, 0.35094978, …                   |
 
 
 **5. Create a second, independent tidy data set with the average of each variable for each activity and each subject.**
